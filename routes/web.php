@@ -34,18 +34,22 @@ Route::get('/user', 'User\HomeController@index')->name('user')->middleware('user
 
 // Superadmin's Routes
 Route::group(['prefix' => 'superadmin', 'middleware' => 'superadmin'], function () {
+
+    //Base Academic
+    Route::get('/academic', function(){
+        return redirect()->route('base-class.index');
+    })->name('academic');
+    Route::group(['prefix' => 'academic'], function () {
+        //Class Management
+        Route::resource('base-class', 'Superadmin\BaseClassController');
+    });
+
+    //Base System Access
+    Route::get('/system-access', function(){
+        return redirect()->route('administrator.index');
+    })->name('system-access');
     Route::group(['prefix' => 'system-access'], function () {
-        //Base System Access
-        Route::get('/system-access', function(){
-            return redirect()->route('administrator');
-        })->name('system-access');
         //Administrator
         Route::resource('administrator', 'Superadmin\AdminController');
-        // Route::get('/administrator', 'Superadmin\AdminController@index')->name('administrator');
-        // Route::get('/administrator/create', 'Superadmin\AdminController@create')->name('administrator.create');
-        // Route::get('/administrator/edit/{id}', 'Superadmin\AdminController@edit')->name('administrator.edit');
-        // Route::put('/administrator/update/{id}', 'Superadmin\AdminController@update')->name('administrator.update');
-        // Route::post('/administrator/store', 'Superadmin\AdminController@store')->name('administrator.store');
-        // Route::delete('/administrator/delete/{id}', 'Superadmin\AdminController@destroy')->name('administrator.delete');
     });
 });

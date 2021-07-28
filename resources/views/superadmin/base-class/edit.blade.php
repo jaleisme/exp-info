@@ -16,40 +16,31 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <form action="{{ route('administrator.update', $data->id) }}" method="POST">
+                <form action="{{ route('base-class.update', $data->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <div class="card-header"><strong>Edit Administrator</strong></div>
+                    <div class="card-header"><strong>Edit Class</strong></div>
                     <div class="card-body">
-                        <h6 class="heading-small text-muted mb-4">User information</h6>
                         <div class="">
                             <div class="row">
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-username">Username</label>
-                                    <input type="text" name="name" id="input-username" class="form-control" placeholder="E.g. John Doe" value="{{ $data->name }}" required>
-                                </div>
+                                <div class="col-12">
+                                    <h6 class="heading-small text-muted mb-4">Class Detail</h6>
                                 </div>
                                 <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-email">Email address</label>
-                                    <input type="email" name="email" id="input-email" class="form-control" placeholder="johndoe@example.com" value="{{ $data->email }}" required>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-first-name">Password</label>
-                                    <input  id="password" name="password" type="password" class="form-control px-3 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="********">
-                                    <small>Fill with their current password if you don't want to change it.</small>
+                                    <label class="form-control-label" for="input-class-name">Class Name</label>
+                                    <input type="text" name="class_name" id="input-class-name" class="form-control" placeholder="E.g. Class A of 2021" value="{{ $data->class_name }}" required>
                                 </div>
                                 </div>
                                 <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-last-name">Confirm Password</label>
-                                    <input type="password" name="confirm_password" id="input-last-name" class="form-control" placeholder="********" required>
-                                    <div class="text-muted font-italic"><small>password strength: <span id="password-status" class="font-weight-700"></span></small></div>
+                                    <label class="form-control-label" for="input-email">Class Leader</label>
+                                    <select name="leader" class="form-control" required>
+                                        <option value="" disabled>Choose Class Leader</option>
+                                        @foreach ($user as $item)
+                                        <option value="{{ $item->id }}" @if($item->id == $data->leader) selected @endif>{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 </div>
                             </div>

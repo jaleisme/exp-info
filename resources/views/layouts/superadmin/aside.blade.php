@@ -27,7 +27,7 @@
           <!-- Navigation -->
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/superadmin/system-access/administrator') }}">
+              <a class="nav-link" href="{{ url('/superadmin/academic/base-class') }}">
                 <i class="fas fa-school"></i>
                 <span class="nav-link-text">Class Management</span>
               </a>
