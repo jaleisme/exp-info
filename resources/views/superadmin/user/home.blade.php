@@ -33,7 +33,7 @@
                 <!-- Card header -->
                 <div class="card-header border-0 d-flex justify-content-end">
                   <h3 class="mb-0 mr-auto">User</h3>
-                  <a href="{{ route('user.create') }}" class="btn btn-sm btn-default mr-3"><i class="fas fa-user-shield"></i><span class="ml-1">Generate from Admins</span></a>
+                  <a href="{{ route('generate-user') }}" class="btn btn-sm btn-default mr-3"><i class="fas fa-user-shield"></i><span class="ml-1">Generate from Admins</span></a>
                   <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i><span class="ml-1">Add new data</span></a>
                 </div>
                 <!-- Light table -->

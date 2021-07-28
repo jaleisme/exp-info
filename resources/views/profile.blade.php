@@ -27,7 +27,7 @@
         </div>
         @endif
         <div class="col-12">
-            <form action="{{ route('save-profile', Auth::user()->id) }}" method="POST">
+            <form action="{{ route('save-profile', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card">
                     <div class="card-header">
@@ -71,6 +71,60 @@
                                 </div>
                             </div>
                         </div>
+                        @if($student)
+                        <hr class="my-5">
+                        <div class="user-information">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h6 class="heading-small text-muted mb-4">User Information</h6>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-control-label">Choose Photo</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFileLang" lang="en" name="photo">
+                                        <label class="custom-file-label" for="customFileLang">Select Photo</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-student_uid">Student ID</label>
+                                        <input type="text" name="student_uid" id="input-student_uid" class="form-control" placeholder="E.g. 1207050***" value="{{ $student->student_uid }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-address">Address</label>
+                                        <textarea name="address" id="input-address" class="form-control" placeholder="E.g. Wolf St. No. 12" required>{{ $student->address }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-about">About</label>
+                                        <input type="text" name="about" id="input-about" class="form-control" placeholder="E.g. Hello There!" value="{{ $student->about }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-tel_num">Phone Number</label>
+                                        <input type="text" name="tel_num" id="input-tel_num" class="form-control" placeholder="+62-****-****-****" value="{{ $student->tel_num }}" required>
+                                        <small>Whatsapp number priority</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-pob">Place of Birth</label>
+                                        <input type="text" name="pob" id="input-pob" class="form-control" placeholder="E.g. Greenwoods, Alabama" value="{{ $student->pob }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-dob">Date of Birth</label>
+                                        <input type="date" name="dob" id="input-dob" class="form-control" value="{{ $student->dob }}" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <a href="{{ url('/home') }}" class="btn btn-sm btn-danger mr-3">Cancel</a>

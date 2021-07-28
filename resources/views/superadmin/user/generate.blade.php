@@ -27,33 +27,16 @@
                                 <div class="col-12">
                                     <h6 class="heading-small text-muted mb-4">User Account</h6>
                                 </div>
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-username">Username</label>
-                                    <input type="text" name="name" id="input-username" class="form-control" placeholder="E.g. John Doe" required>
-                                </div>
-                                </div>
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-email">Email address</label>
-                                    <input type="email" name="email" id="input-email" class="form-control" placeholder="johndoe@example.com" required>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-first-name">Password</label>
-                                    <input  id="password" name="password" type="password" class="form-control px-3 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="********">
-                                    <small>Password must be more than 8 characters</small>
-                                </div>
-                                </div>
-                                <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-last-name">Confirm Password</label>
-                                    <input type="password" name="confirm_password" id="input-last-name" class="form-control" placeholder="********" required>
-                                    <div class="text-muted font-italic"><small>password strength: <span id="password-status" class="font-weight-700"></span></small></div>
-                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-account">User Account</label>
+                                        <select name="id_user" id="input-account" class="form-control" required>
+                                            <option value="" selected disabled>Choose Account</option>
+                                            @foreach ($user as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -122,50 +105,5 @@
 @endsection
 
 @section('custom-script')
-<script>
-    let status = $('#password-status')
-    let input = $('#password')
-    let length = 0
-    $('document').ready(function(){
-      status.addClass('text-danger')
-      status.text('too weak')
-    })
-    input.keyup(function(){
-        length = input.val().length;
-        if(length == 0){
-          status.removeClass('text-success')
-          status.removeClass('text-warning')
-          console.log('too weak '+length);
-          status.addClass('text-danger')
-          status.text('too weak')
-        }
-        if(length > 0 || length <= 6){
-          status.removeClass('text-success')
-          status.removeClass('text-danger')
-          console.log('weak '+length);
 
-          status.addClass('text-warning')
-          status.text('weak')
-        }
-        if(length > 6){
-          status.removeClass('text-warning')
-          status.removeClass('text-danger')
-          console.log('strong '+length);
-
-          status.addClass('text-success')
-          status.text('strong')
-        }
-    })
-
-    let role_check = $('#role_check')
-    role_check.change(function(){
-        if (role_check.is(':checked')) {
-            $('#role').val(1)
-        }
-        else{
-            $('#role').val(2)
-        }
-        // console.log($('#role').val())
-    })
-</script>
 @endsection

@@ -112,7 +112,7 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end">
-                        <a href="{{ url('superadmin/system-access/administrator') }}" class="btn btn-sm btn-danger mr-3">Cancel</a>
+                        <a href="{{ url('superadmin/system-access/user') }}" class="btn btn-sm btn-danger mr-3">Cancel</a>
                         <button class="btn btn-sm btn-primary" type="submit">Save Changes</button>
                     </div>
                 </form>

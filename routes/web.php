@@ -54,6 +54,6 @@ Route::group(['prefix' => 'superadmin', 'middleware' => 'superadmin'], function 
 
         //Administrator
         Route::resource('user', 'Superadmin\UserController');
-
+        Route::get('/generate-user', 'Superadmin\UserController@generateAdmin')->name('generate-user');
     });
 });

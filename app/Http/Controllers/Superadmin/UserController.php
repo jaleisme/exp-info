@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Student;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -38,27 +39,35 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if(strlen($request->password) < 8){
-            return redirect('/superadmin/system-access/user')->with('msg', 'Password must be 8 characters or more.');
+        $data = new User;
+        $student = new Student;
+
+        if($request->id_user){
+            $student->id_user = $request->id_user;
         }
-        if($request->password !== $request->confirm_password){
-            return redirect('/superadmin/system-access/user')->with('msg', 'Password and Confirmation does not match.');
+        else {
+            if(strlen($request->password) < 8){
+                return redirect('/superadmin/system-access/user')->with('msg', 'Password must be 8 characters or more.');
+            }
+            if($request->password !== $request->confirm_password){
+                return redirect('/superadmin/system-access/user')->with('msg', 'Password and Confirmation does not match.');
+            }
+
+            $data->name = $request->name;
+            $data->email = $request->email;
+            $data->password = bcrypt($request->password);
+            $data->role = 3;
+            $data->save();
+
+            $student->id_user = $data->id;
         }
 
-        $data = new User;
-        $data->name = $request->name;
-        $data->email = $request->email;
-        $data->password = bcrypt($request->password);
-        $data->role = 3;
-        $data->save();
 
         $file = $request->file('photo');
         $filename = $request->name.'_'.time().$file->getClientOriginalExtension();
         $destination = 'img/user-img';
         $file->move($destination, $filename);
 
-        $student = new Student;
-        $student->id_user = $data->id;
         $student->student_uid = $request->student_uid;
         $student->about = $request->about;
         $student->address = $request->address;
@@ -91,6 +100,7 @@ class UserController extends Controller
     {
         $data = User::findOrFail($id);
         $student = Student::where('id_user', $id)->first();
+        // dd($student);
         return view('superadmin.user.edit', compact(['data', 'student']));
     }
 
@@ -149,8 +159,18 @@ class UserController extends Controller
         if($student){
             $student->delete();
         }
-        $data = User::findOrFail($id);
-        $data->delete();
         return redirect('/superadmin/system-access/user')->with('danger', 'User has been deleted.');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function generateAdmin()
+    {
+        // return 'OI';
+        $user = User::where('role', '!=', 3)->get();
+        return view('superadmin.user.generate', compact(['user']));
     }
 }
