@@ -15,6 +15,7 @@ class CreateInformationTable extends Migration
     {
         Schema::create('information', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_class')->nullable();
             $table->integer('urgency');
             $table->string('info_title');
             $table->text('info_detail');

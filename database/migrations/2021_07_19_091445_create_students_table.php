@@ -17,6 +17,7 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->integer('id_user');
             $table->integer('student_uid');
+            $table->string('about')->default('Hello there fellow expellers!')->nullable();
             $table->string('photo');
             $table->string('address');
             $table->string('tel_num');
