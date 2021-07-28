@@ -18,12 +18,12 @@
         <link rel="stylesheet" href="{{ asset('/templates/css/argon.css?v=1.2.0') }}" type="text/css">
       </head>
 
-<body class="bg-default">
+<body class="bg-gradient-default">
   <!-- Navbar -->
   <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
     <div class="container">
       <a class="navbar-brand" href="{{ url('/') }}">
-        <img src="{{ asset('') }}" alt="Logo">
+        <img src="{{ asset('/img/logo.png') }}" alt="Logo" alt="Logo" style="width: 64px; height: 64px;">
         {{-- <img src="{{ asset('/templates/img/brand/white.png') }}" alt="Logo"> --}}
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,20 +77,20 @@
   <!-- Main content -->
   <div class="main-content">
     <!-- Header -->
-    <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
+    <div class="header bg-gradient-default py-7 py-lg-8 pt-lg-9">
       <div class="container">
         <div class="header-body text-center mb-7">
           <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-8 px-5">
               <h1 class="text-white">Create an account</h1>
-              <p class="text-lead text-white">Create a new account to access a simple and futuristic multi-role authentication system.</p>
+              <p class="text-lead text-white">Create a new account to access the simple academic and non-academic information system.</p>
             </div>
           </div>
         </div>
       </div>
       <div class="separator separator-bottom separator-skew zindex-100">
         <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+          <polygon class="fill-danger" points="2560 0 2560 100 0 100"></polygon>
         </svg>
       </div>
     </div>

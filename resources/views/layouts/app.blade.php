@@ -101,6 +101,7 @@
                             $url = explode('/', Request::url());
                             $bc = [];
                             $fix = [];
+                            $part ='';
                             foreach ($url as $key => $value) {
                             if (strpos($value, 'http') !== false || strpos($value, '127') !== false ) {
 
@@ -118,8 +119,11 @@
                             $last = count($fix) - 1;
                         @endphp
                         @foreach ($fix as $k => $item)
+                        @php
+                            $part = $part.'/'.$item;
+                        @endphp
                         <li class="breadcrumb-item" aria-current="page">
-                            <a href="{{ route($item) }}" class="@if($k == $last) text-muted @endif">
+                            <a href="{{ $part }}" class="@if($k == $last) text-muted @endif">
                                 {{ $item }}
                             </a>
                     </li>

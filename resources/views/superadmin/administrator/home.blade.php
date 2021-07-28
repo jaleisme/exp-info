@@ -43,6 +43,7 @@
                         <th scope="col" style="width: 5%;"><strong>#</strong></th>
                         <th scope="col">Username</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Role</th>
                         <th scope="col" style="width: 20%;">Action</th>
                       </tr>
                     </thead>
@@ -58,11 +59,18 @@
                             <td>
                                 {{ $item->email }}
                             </td>
+                            <td>
+                                @if ($item->role == 1)
+                                <span class="badge badge-pill badge-primary">Superadmin</span>
+                                @elseif($item->role == 2)
+                                <span class="badge badge-pill badge-warning">Admin</span>
+                                @endif
+                            </td>
                             <td class="d-flex justify-content-center">
                                 <a class="btn btn-sm btn-white text-warning btn-icon-only d-flex justify-content-center align-items-center" href="{{ route('administrator.edit', $item->id) }}" tooltip="Edit">
                                   <i class="fas fa-pen"></i>
                                 </a>
-                                <form method="POST" action="{{ route('administrator.delete', $item->id) }}">
+                                <form method="POST" action="{{ route('administrator.destroy', $item->id) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-white text-danger btn-icon-only d-flex justify-content-center align-items-center" type="submit" tooltip="Delete">

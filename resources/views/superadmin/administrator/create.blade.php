@@ -22,9 +22,21 @@
                     @csrf
                     <div class="card-header"><strong>New Administrator</strong></div>
                     <div class="card-body">
-                        <h6 class="heading-small text-muted mb-4">User information</h6>
                         <div class="">
                             <div class="row">
+                                <div class="col-6">
+                                    <h6 class="heading-small text-muted mb-4">User information</h6>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex flex-col justify-content-end">
+                                        <input type="hidden" name="role" id="role" value="2">
+                                        <small class="mr-2">Set as Superadmin</small>
+                                        <label class="custom-toggle">
+                                            <input type="checkbox" id="role_check">
+                                            <span class="custom-toggle-slider rounded-circle"></span>
+                                        </label>
+                                    </div>
+                                </div>
                                 <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-username">Username</label>
@@ -101,6 +113,17 @@
           status.addClass('text-success')
           status.text('strong')
         }
+    })
+
+    let role_check = $('#role_check')
+    role_check.change(function(){
+        if (role_check.is(':checked')) {
+            $('#role').val(1)
+        }
+        else{
+            $('#role').val(2)
+        }
+        // console.log($('#role').val())
     })
 </script>
 @endsection

@@ -19,7 +19,7 @@ class AdminController extends Controller
         if(Auth::user()->role !== 1){
             return redirect('/home');
         }
-        $data = User::where('role', 2)->get();
+        $data = User::where('role', '!=', 3)->get();
         return view('superadmin.administrator.home', compact(['data']));
     }
 
@@ -55,7 +55,7 @@ class AdminController extends Controller
         $data->name = $request->name;
         $data->email = $request->email;
         $data->password = bcrypt($request->password);
-        $data->role = 2;
+        $data->role = $request->role;
         $data->save();
         return redirect('/superadmin/system-access/administrator')->with('success', 'Administrator has been created.');
     }
