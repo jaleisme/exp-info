@@ -51,5 +51,9 @@ Route::group(['prefix' => 'superadmin', 'middleware' => 'superadmin'], function 
     Route::group(['prefix' => 'system-access'], function () {
         //Administrator
         Route::resource('administrator', 'Superadmin\AdminController');
+
+        //Administrator
+        Route::resource('user', 'Superadmin\UserController');
+
     });
 });

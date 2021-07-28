@@ -34,12 +34,6 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/superadmin/system-access/administrator') }}">
-                <i class="fas fa-user-graduate"></i>
-                <span class="nav-link-text">Student Management</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url('/superadmin/system-access/administrator') }}">
                 <i class="fas fa-info-circle"></i>
                 <span class="nav-link-text">Info Management</span>
               </a>
@@ -60,7 +54,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/superadmin/system-access/administrator') }}">
+              <a class="nav-link" href="{{ url('/superadmin/system-access/user') }}">
                 <i class="fas fa-user-lock"></i>
                 <span class="nav-link-text">User</span>
               </a>

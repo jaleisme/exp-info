@@ -23,7 +23,6 @@ class CreateStudentsTable extends Migration
             $table->string('tel_num');
             $table->string('pob');
             $table->string('dob');
-            $table->string('status');
             $table->timestamps();
         });
     }
