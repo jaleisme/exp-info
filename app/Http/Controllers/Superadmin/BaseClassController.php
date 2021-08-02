@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Superadmin;
 
 use App\BaseClass;
 use App\Http\Controllers\Controller;
+use App\StudentClass;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -66,8 +67,13 @@ class BaseClassController extends Controller
     public function edit($id)
     {
         $data = BaseClass::findOrFail($id);
-        $user = User::where('role', 2)->get();
-        return view('superadmin.base-class.edit', compact(['data', 'user']));
+        $users = StudentClass::select('class_students.id', 'class_students.id_student', 'class_students.id_class', 'users.id as id_user', 'users.name', 'users.email')
+            ->leftJoin('users', 'class_students.id_student', 'users.id')
+            ->where('id_class', $id)
+            ->groupBy('class_students.id', 'class_students.id_student', 'class_students.id_class', 'users.id', 'users.name', 'users.email')
+            ->get();
+        $all_student = User::where('role', 3)->get();
+        return view('superadmin.base-class.edit', compact(['data', 'users', 'all_student']));
     }
 
     /**
@@ -80,10 +86,40 @@ class BaseClassController extends Controller
     public function update(Request $request, $id)
     {
         $data = BaseClass::findOrFail($id);
-        $data->leader = $request->leader;
         $data->class_name = $request->class_name;
         $data->save();
         return redirect('/superadmin/academic/base-class')->with('success', 'Class has been updated.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addStudent(Request $request)
+    {
+        $data = new StudentClass;
+        $data->id_class = $request->class_id;
+        $data->id_student = $request->student;
+        $data->save();
+        return redirect('/superadmin/academic/base-class')->with('success', 'Class has been updated.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function removeStudent(Request $request)
+    {
+        $data = StudentClass::where('id_class', $request->class_id)->where('id_student', $request->student_id)->first();
+        $data->delete();
+        // dd($request);
+        return redirect('/superadmin/academic/base-class')->with('danger', 'Student has been removed.');
     }
 
     /**
@@ -94,6 +130,10 @@ class BaseClassController extends Controller
      */
     public function destroy($id)
     {
+        $sc = StudentClass::where('id_class', $id)->get();
+        foreach ($sc as $value) {
+            $value->delete();
+        }
         $data = BaseClass::findOrFail($id);
         $data->delete();
         return redirect('/superadmin/academic/base-class')->with('danger', 'Class has been deleted.');

@@ -42,6 +42,8 @@ Route::group(['prefix' => 'superadmin', 'middleware' => 'superadmin'], function 
     Route::group(['prefix' => 'academic'], function () {
         //Class Management
         Route::resource('base-class', 'Superadmin\BaseClassController');
+        Route::post('add-student', 'Superadmin\BaseClassController@addStudent')->name('add-student');
+        Route::post('remove-student', 'Superadmin\BaseClassController@removeStudent')->name('remove-student');
     });
 
     //Base System Access
